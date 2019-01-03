@@ -7,7 +7,8 @@ node{
     stage('CodeCompileAndExecute'){
         bat '''echo %cd%
         echo %JOB_NAME%
-        javac Add.java'''
+        javac Add.java
+		java Add'''
     }
     
     stage('Release'){
