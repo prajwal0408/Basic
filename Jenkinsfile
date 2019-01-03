@@ -4,17 +4,13 @@ node{
         step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'prajwal.narayan@tecnotree.com', sendToIndividuals: false])
     }
     
-    stage('CodeCompile'){
+    stage('CodeCompileAndCodeExecution'){
         bat '''echo %cd%
         echo %JOB_NAME%
-        javac Add.java'''
+        javac Add.java
+		java Add'''
     }
-    
-    stage('CodeExecution'){
-        bat '''echo "%cd%"
-        java Add'''
-    }
-    
+        
     stage('Release'){
         emailext attachLog: true, body: 'Software built successfully and executed', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'prajwal.narayan@tecnotree.com'
     }
